@@ -1,5 +1,5 @@
 {
-  "name": "tdtesttask",
+  "name": "tdtask",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -9,11 +9,25 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "vue": "^3.4.35"
+    "element-plus": "^2.8.0",
+    "pinia": "^2.2.1",
+    "uuid": "^10.0.0",
+    "vue": "^3.4.35",
+    "vue-router": "^4.4.3"
   },
   "devDependencies": {
+    "@types/node": "^22.2.0",
+    "@types/uuid": "^10.0.0",
     "@vitejs/plugin-vue": "^5.1.2",
+    "eslint": "^9.9.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.2.1",
+    "eslint-plugin-vue": "^9.27.0",
+    "prettier": "^3.3.3",
+    "sass-embedded": "^1.77.8",
     "typescript": "^5.5.3",
+    "unplugin-auto-import": "^0.18.2",
+    "unplugin-vue-components": "^0.27.4",
     "vite": "^5.4.0",
     "vue-tsc": "^2.0.29"
   }
