@@ -3,3 +3,13 @@ html, body {
   height: 100%;
   background-color: #f5f9e9;
 }
+
+.dialog-footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  & button {
+    flex: 1;
+  }
+}

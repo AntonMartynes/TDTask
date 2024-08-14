@@ -20,14 +20,4 @@ const deleteBook = () => {
   </el-dialog>
 </template>
 
-<style scoped lang="scss">
-.dialog-footer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  & button {
-    flex: 1;
-  }
-}
-</style>
+<style scoped lang="scss"></style>

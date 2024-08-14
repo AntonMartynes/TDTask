@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { computed, reactive } from "vue";
-import { useDialogStore } from "../../../store/dialogsStore";
-
 import { v4 as uuidv4 } from "uuid";
+
+import { useDialogStore } from "../../../store/dialogsStore";
 import { useBookStore } from "../../../store/bookStore";
 
 const dialogStore = useDialogStore();

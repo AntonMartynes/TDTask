@@ -1,10 +1,13 @@
 <script setup lang="ts">
 import { ref } from "vue";
+
 import { useUsersStore } from "../store/userStore";
-import { IUser } from "../types/user";
+
 import Header from "../components/TheHeader.vue";
 import Footer from "../components/TheFooter.vue";
 import UsersList from "../components/Users/UsersList.vue";
+
+import { IUser } from "../types/user";
 
 const userStore = useUsersStore();
 

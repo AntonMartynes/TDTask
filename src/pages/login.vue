@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { computed, ref } from "vue";
-import { useUsersStore } from "../store/userStore";
-import { ElNotification } from "element-plus";
 import { useRouter } from "vue-router";
+
+import { ElNotification } from "element-plus";
+
+import { useUsersStore } from "../store/userStore";
 
 const usersStore = useUsersStore();
 

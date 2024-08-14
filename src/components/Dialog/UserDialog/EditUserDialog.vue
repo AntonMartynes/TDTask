@@ -1,8 +1,13 @@
 <script setup lang="ts">
-import { useDialogStore } from "../../../store/dialogsStore";
 import { computed, reactive, watch } from "vue";
-import { IUser, UserRole } from "../../../types/user";
+import { cloneDeep } from 'lodash';
+
+import { useDialogStore } from "../../../store/dialogsStore";
 import { useUsersStore } from "../../../store/userStore";
+
+import { IUser, UserRole } from "../../../types/user";
+
+const formLabelWidth = "140px";
 
 const dialogStore = useDialogStore();
 const userStore = useUsersStore();
@@ -15,32 +20,45 @@ const form = reactive<IUser>({
   id: "",
 });
 
-const formLabelWidth = "140px";
-
 const isConfirmBtnDisable = computed(() => {
   return !form.name || !form.login || !form.password || !form.role || !form.id;
 });
 
+const resetForm = () => {
+  Object.assign(form, {
+    name: "",
+    login: "",
+    password: "",
+    role: "",
+    id: "",
+  });
+};
+
 const handleEditeUser = () => {
-  userStore.editUser(form);
-  return dialogStore.toggleEditUserDialogOpen(false);
+  if (form.id) {
+    userStore.editUser({ ...form }); // Используем клон объекта для изменения
+  } else {
+    userStore.addUser({ ...form });
+  }
+  resetForm();
+  dialogStore.toggleEditUserDialogOpen(false);
 };
 
 watch(
   () => userStore.getEditedUser,
   (newVal) => {
-    console.log(newVal);
-    form.name = newVal.name;
-    form.login = newVal.login;
-    form.password = newVal.password;
-    form.role = newVal.role;
-    form.id = newVal.id;
+    if (newVal) {
+      Object.assign(form, cloneDeep(newVal)); // Клонируем объект, чтобы избежать изменения оригинала
+    } else {
+      resetForm();
+    }
   },
+  { immediate: true }
 );
 </script>
 
 <template>
-  <el-dialog v-model="dialogStore.isEditUserDialogOpen" title="Add new book" width="360">
+  <el-dialog v-model="dialogStore.isEditUserDialogOpen" :title="`Edit ${form.name}`" width="360">
     <el-form :model="form">
       <el-form-item label="Name" :label-width="formLabelWidth" label-position="left">
         <el-input v-model="form.name" autocomplete="off" />

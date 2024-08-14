@@ -1,7 +1,10 @@
 <script setup lang="ts">
+import { computed, reactive, watch } from "vue";
+import { cloneDeep } from 'lodash';
+
 import { useDialogStore } from "../../../store/dialogsStore";
 import { useBookStore } from "../../../store/bookStore";
-import { computed, reactive, watch } from "vue";
+
 import { IBooks } from "../../../types/books";
 
 const dialogStore = useDialogStore();
@@ -16,6 +19,17 @@ const form = reactive<IBooks>({
   id: "",
 });
 
+const resetForm = () => {
+  Object.assign(form, {
+    title: "",
+    author: "",
+    description: "",
+    year: "",
+    created_by: "",
+    id: "",
+  });
+};
+
 const formLabelWidth = "140px";
 
 const isConfirmBtnDisable = computed(() => {
@@ -23,25 +37,30 @@ const isConfirmBtnDisable = computed(() => {
 });
 
 const handleEditeBook = () => {
-  bookStore.editBook(form);
-  return dialogStore.toggleEditBookDialogOpen(false);
+  if (form.id) {
+    bookStore.editBook({ ...form });
+  } else {
+    bookStore.addBook({ ...form });
+  }
+  resetForm();
+  dialogStore.toggleEditBookDialogOpen(false);
 };
 
 watch(
   () => bookStore.getEditedBook,
   (newVal) => {
-    form.title = newVal.title;
-    form.author = newVal.author;
-    form.description = newVal.description;
-    form.year = newVal.year;
-    form.created_by = newVal.created_by;
-    form.id = newVal.id;
+    if (newVal) {
+      Object.assign(form, cloneDeep(newVal));
+    } else {
+      resetForm();
+    }
   },
+  { immediate: true }
 );
 </script>
 
 <template>
-  <el-dialog v-model="dialogStore.isEditBookDialogOpen" title="Add new book" width="360">
+  <el-dialog v-model="dialogStore.isEditBookDialogOpen" :title="`Edit ${form.title}`" width="360">
     <el-form :model="form">
       <el-form-item label="Title" :label-width="formLabelWidth" label-position="left">
         <el-input v-model="form.title" autocomplete="off" />

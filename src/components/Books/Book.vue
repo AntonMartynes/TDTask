@@ -1,11 +1,14 @@
 <script setup lang="ts">
 import { computed, PropType } from "vue";
-import { IBooks } from "../../types/books";
-import { Delete, Edit } from "@element-plus/icons-vue";
-import { UserRole } from "../../types/user";
-import { useDialogStore } from "../../store/dialogsStore";
 
+import { Delete, Edit } from "@element-plus/icons-vue";
+
+import { useDialogStore } from "../../store/dialogsStore";
 import { useBookStore } from "../../store/bookStore";
+
+import { UserRole } from "../../types/user";
+import { IBooks } from "../../types/books";
+
 
 const userRole = localStorage.getItem("userRole");
 

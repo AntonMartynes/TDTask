@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { useRoute, useRouter } from "vue-router";
-import { UserRole } from "../types/user";
 import { computed } from "vue";
+
+import { UserRole } from "../types/user";
 
 const router = useRouter();
 const route = useRoute();
