@@ -1,12 +1,20 @@
 <script setup lang="ts">
-import { Position } from "@element-plus/icons-vue";
+import { Position, Link, Message } from "@element-plus/icons-vue";
 </script>
 
 <template>
   <footer class="footer">
-    <div class="heaer__btns">
-      <el-button type="primary" :icon="Position" />
-    </div>
+      <a href="https://t.me/AntonMartynes" target="_blank">
+        <el-button type="primary" :icon="Position" />
+      </a>
+
+      <a href="mailto:martynesharsiia.anton@gmail.com">
+        <el-button type="primary" :icon="Message" />
+      </a>
+
+      <a href="https://www.linkedin.com/in/anton-martynes-harsiia-a02327265" target="_blank">
+        <el-button type="primary" :icon="Link" />
+      </a>
   </footer>
 </template>
 

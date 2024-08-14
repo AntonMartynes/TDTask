@@ -17,7 +17,7 @@ const findUser = () => {
   if (!user) {
     return ElNotification({
       title: "Warning",
-      message: "This is a warning message",
+      message: "Login or password is wrong",
       type: "error",
     });
   }
@@ -28,7 +28,7 @@ const findUser = () => {
 
   ElNotification({
     title: "Success",
-    message: "This is a success message",
+    message: "Login success",
     type: "success",
   });
 
